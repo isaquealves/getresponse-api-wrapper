@@ -30,4 +30,6 @@ class ErrorCodesEnum(enum.Enum):
             (item.message, item.exception_cls)
             for item in cls
             if item.code == code
-        ][0]  # TODO: should improve this(?).
+        ][
+            0
+        ]  # TODO: should improve this(?).

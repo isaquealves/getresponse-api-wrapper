@@ -28,7 +28,7 @@ class TestHooks:
     def test_check_response_errors(
         self, resolve_redirs, mock_send, status_code, raise_for_status
     ):
-        url = "http://localhost"
+        url = "https://localhost"
         # TODO: Refactor and improve
         mock_response = mock.MagicMock()
         mock_response.json = mock.Mock(return_value={"httpStatus": status_code})
@@ -38,6 +38,12 @@ class TestHooks:
         mock_response.raise_for_status = mock.Mock(return_value=mock.MagicMock())
         mock_response.is_redirect.return_value = False
         session = requests.Session()
+        session.headers.update(
+            {
+                "X-Auth-Token": f"api-key jysc768rglopo9revd4jtibeqd3vz0q2",
+                "Content-Type": "application/json",
+            }
+        )
         session.hooks = {"response": hooks.check_response_errors}
         if status_code in [400, 401, 429]:
             with pytest.raises(raise_for_status):

@@ -24,7 +24,7 @@ class AuthenticationFailureException(Exception):
     """
 
     def __init__(self, message: str = None, **kwargs):
-        self.auth_type = kwargs.get("auth_type", "api_key")
+        self.auth_type = kwargs.get("auth_type", "api-key")
         self.message = f"{message} with {self.auth_type} auth type"
 
 
@@ -33,7 +33,4 @@ class BadAPIRequest(Exception):
     """
 
     def __init__(self, message: str = None, **kwargs):
-        self.request_params = kwargs.get("request_params", {})
-        self.message = (
-            f"{message} with params {json.dumps(self.request_params)}"
-        )
+        self.message = f"{message}"

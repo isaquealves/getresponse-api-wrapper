@@ -21,6 +21,5 @@ class TestExceptions:
     def test_bad_request_can_be_raised(self):
         with pytest.raises(exceptions.BadAPIRequest):
             raise exceptions.BadAPIRequest(
-                message="Bad Request",
-                request_params={"name": "test"}
+                message="Bad Request"
             )

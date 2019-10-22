@@ -20,9 +20,7 @@ class Request:
                 "Content-Type": "application/json",
             }
         )
-        self.session.hooks = {
-            "response": check_response_errors
-        }
+        self.session.hooks = {"response": check_response_errors}
 
     def get(self, url: str = "", **kwargs) -> requests.models.Response:
         """A wrapper for requests.session.get
