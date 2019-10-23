@@ -20,5 +20,5 @@ def check_response_errors(response, *args, **kwargs):
             code=response.status_code
         )
 
-        raise exception(message=msg, **{"auth_type": auth_type, })
+        raise exception(message=msg, **{"auth_type": auth_type})
     return response.raise_for_status()

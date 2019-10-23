@@ -71,6 +71,11 @@ class TestAccounts:
         self.accounts.update_account_info(data=update_data)
         self.mock_post.assert_called()
 
-    def test_update_account_info_raise_with_invalid_keys(self):
-        with pytest.raises(KeyError):
-            self.accounts.update_account_info()
+    @pytest.mark.parametrize("data,exc", [
+        ({}, ValueError),
+        ({'name': 'Name'}, KeyError)
+    ])
+    def test_update_account_info_raise_with_invalid_data(self, data, exc):
+        with pytest.raises(exc):
+            self.accounts.update_account_info(data=data)
+
