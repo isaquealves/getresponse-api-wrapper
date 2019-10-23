@@ -64,7 +64,6 @@ Take a look at issues tab to find out something you can help to solve.
 ---
 
 
-
 ## Understanding GetResponse API Wrapper
 
 GetResponse API offers a large collection of resources, as can be seen on [Documentation](https://apireference.getresponse.com), so we start building this wrapper to ease integration for other apps.
