@@ -2,6 +2,19 @@
 
 Wrapping GetResponse API to simplify integrations
 
+## Table Of Contents
+* **[Motivation](#motivation)**
+
+* **[Setting things up as colaborator](#setting-things-up-as-colaborator)**
+  * [Clone this repository](#clone-this-repository)
+  * [Install Pyenv](#install-pyenv)
+  * [Install Poetry](#install-poetry)
+  * [Solve an issue](#solve-an-issue)
+
+* **[Understanding GetResponse API Wrapper](#understanding-getresponse-api-wrapper)**
+  * [The Resources](#the-resources)
+  * [The Client](#the-client)
+
 ## Motivation
 
 GetResponse is one of the most used email marketing automation tools and its API is awesome, but somehow complex to use in user applications.\
@@ -44,17 +57,13 @@ poetry install
 
 This should install all project dependencies.
 
-### Choose or create an issue and implement solution
+### Solve an issue
 
 Take a look at issues tab to find out something you can help to solve.
 
 ---
 
-## Table Of Contents
 
-* **[Understanding GetResponse API Wrapper](#understanding-getresponse-api-wrapper)**
-  * [The Resources](#the-resources)
-  * [The Client](#the-client)
 
 ## Understanding GetResponse API Wrapper
 
