@@ -52,9 +52,9 @@ Take a look at issues tab to find out something you can help to solve.
 
 ## Table Of Contents
 
-* **[Understanding GetResponse API Wrapper](#understanding)**
-  * [The Resources](#the_resources)
-  * [The Client](#the_client)
+* **[Understanding GetResponse API Wrapper](#understanding-getresponse-api-wrapper)**
+  * [The Resources](#the-resources)
+  * [The Client](#the-client)
 
 ## Understanding GetResponse API Wrapper
 
