@@ -15,5 +15,3 @@ class GetResponseClient:
 
     def accounts(self):
         return Accounts(self.request)
-
-

@@ -20,7 +20,7 @@ class TestHooks:
             (400, exceptions.BadAPIRequest),
             (401, exceptions.AuthenticationFailureException),
             (429, exceptions.ReachedQuotaException),
-            (500, requests.exceptions.HTTPError)
+            (500, requests.exceptions.HTTPError),
         ],
     )
     @mock.patch.object(requests.adapters.HTTPAdapter, "send")
@@ -31,11 +31,15 @@ class TestHooks:
         url = "https://localhost"
         # TODO: Refactor and improve
         mock_response = mock.MagicMock()
-        mock_response.json = mock.Mock(return_value={"httpStatus": status_code})
+        mock_response.json = mock.Mock(
+            return_value={"httpStatus": status_code}
+        )
         mock_send.return_value = mock_response
         resolve_redirs.return_value = []
         mock_response.status_code = status_code
-        mock_response.raise_for_status = mock.Mock(return_value=mock.MagicMock())
+        mock_response.raise_for_status = mock.Mock(
+            return_value=mock.MagicMock()
+        )
         mock_response.is_redirect.return_value = False
         session = requests.Session()
         session.headers.update(
