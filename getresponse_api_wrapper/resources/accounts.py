@@ -98,3 +98,9 @@ class Accounts(BaseResource):
 
         response = self.request.post("/accounts", json=json.dumps(data))
         return response.json()
+
+    def get_billing_info(self, fields: List[str] = None):
+        """
+        """
+        response = self.request.get("/accounts/billing")
+        return response.json()

@@ -1,4 +1,5 @@
 from unittest import mock
+import inspect
 import pytest
 import requests
 from _pytest.monkeypatch import MonkeyPatch
@@ -13,9 +14,9 @@ class TestAccounts:
     monkeypatch = MonkeyPatch()
 
     def setup(self):
-        config = Config()
-        request = Request(config)
-        self.accounts = accounts.Accounts(request)
+        self.config = Config()
+        self.request = Request(self.config)
+        self.accounts = accounts.Accounts(self.request)
         self.mock_get = mock.MagicMock()
         self.mock_post = mock.MagicMock()
         self.monkeypatch.setattr("requests.Session.get", self.mock_get)
@@ -79,3 +80,12 @@ class TestAccounts:
         with pytest.raises(exc):
             self.accounts.update_account_info(data=data)
 
+    def test_get_full_billing_information_called_with(self):
+        self.accounts.get_billing_info()
+        self.mock_get.assert_called_with(
+            url=f"{self.config.base_url}/accounts/billing"
+        )
+
+    def test_get_billing_info_accept_params(self):
+        get_billing = inspect.getfullargspec(self.accounts.get_billing_info)
+        assert 'fields' in get_billing.args
