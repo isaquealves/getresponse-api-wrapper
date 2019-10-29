@@ -13,5 +13,6 @@ class GetResponseClient:
         self._config = config
         self.request = Request(self._config)
 
+    @property
     def accounts(self):
         return Accounts(self.request)

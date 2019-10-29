@@ -1,3 +1,4 @@
+import json
 from unittest import mock
 import inspect
 import pytest
@@ -19,8 +20,10 @@ class TestAccounts:
         self.accounts = accounts.Accounts(self.request)
         self.mock_get = mock.MagicMock()
         self.mock_post = mock.MagicMock()
+        self.mock_delete = mock.MagicMock()
         self.monkeypatch.setattr("requests.Session.get", self.mock_get)
         self.monkeypatch.setattr("requests.Session.post", self.mock_post)
+        self.monkeypatch.setattr("requests.Session.delete", self.mock_delete)
 
     @classmethod
     def teardown_class(cls):
@@ -83,9 +86,29 @@ class TestAccounts:
     def test_get_full_billing_information_called_with(self):
         self.accounts.get_billing_info()
         self.mock_get.assert_called_with(
-            url=f"{self.config.base_url}/accounts/billing"
+            url=f"{self.config.base_url}/accounts/billing",
+            params={'fields': None}
         )
 
     def test_get_billing_info_accept_params(self):
         get_billing = inspect.getfullargspec(self.accounts.get_billing_info)
         assert 'fields' in get_billing.args
+
+    def test_get_callbacks(self):
+        self.accounts.get_callbacks()
+        self.mock_get.assert_called_once_with(
+            url=f"{self.config.base_url}/accounts/callbacks"
+        )
+
+    @pytest.mark.parametrize("callback_sample", [
+        True,
+        False
+    ], indirect=["callback_sample"])
+    @pytest.mark.usefixtures("callback_sample")
+    def test_set_callbacks(self, callback_sample):
+        self.accounts.set_callbacks(data=callback_sample)
+        self.mock_post.assert_called_with("/accounts/callbacks", data=json.dumps(callback_sample))
+
+    def test_delete_callbacks(self):
+        self.accounts.delete_callbacks()
+        self.mock_delete.assert_called_once()
