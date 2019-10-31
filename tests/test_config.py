@@ -11,16 +11,14 @@ from getresponse_api_wrapper.settings import Config
 
 class TestConfig:
     def setup(self):
-        self.configobj = Config()
+        supported = {"env.circleci": decouple.RepositoryEnv}
+        self.configobj = Config(supported=supported)
 
     def test_is_class(self):
         assert inspect.isclass(Config), "Config is anything but a class"
 
     def test_is_instantiable(self):
         assert self.configobj is not None, "Config cannot be instantiated"
-
-    def test_has_base_url(self):
-        assert hasattr(self.configobj, "base_url"), "No member base_url found"
 
     def test_raise_invalid_base_url(self):
         os.environ["BASE_URL"] = "something"
@@ -30,19 +28,26 @@ class TestConfig:
         del os.environ["BASE_URL"]
 
     def test_raise_no_base_url(self):
+        BASE_URL = os.environ.pop(
+            "BASE_URL",
+            "https://localhost"
+        )
         path = Path(__file__).parent
         config = Config(path)
         with pytest.raises(decouple.UndefinedValueError):
             config.base_url
-
-    def test_has_api_key(self):
-        assert hasattr(self.configobj, "api_key"), "No member api_key found"
+        os.environ["BASE_URL"] = BASE_URL
 
     def test_raise_no_api_key(self):
+        APIKEY = os.environ.pop(
+            "API_KEY",
+            "oSQMBAmyfHrQrHBBfZEnDOlvsCJpaaVF"
+        )
         path = Path(__file__).parent
         config = Config(path)
         with pytest.raises(decouple.UndefinedValueError):
             config.api_key
+        os.environ["API_KEY"] = APIKEY
 
     def test_is_not_enterprise(self):
         assert self.configobj.is_enterprise is False
