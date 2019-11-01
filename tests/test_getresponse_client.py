@@ -17,7 +17,7 @@ class TestGetResponseClient:
 
     def test_need_config(self):
         client_init = inspect.getfullargspec(GetResponseClient.__init__)
-        assert 'config' in client_init.args
+        assert "config" in client_init.args
 
     def test_has_accounts(self):
         assert hasattr(GetResponseClient, "accounts")

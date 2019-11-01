@@ -98,3 +98,47 @@ class Accounts(BaseResource):
 
         response = self.request.post("/accounts", json=json.dumps(data))
         return response.json()
+
+    def get_billing_info(self, fields: List[str] = None):
+        """Return account billing info displaying only informed fields or all
+        Parameters
+        ----------
+        fields: List
+            A list of fields to be displayed.
+        """
+        response = self.request.get(
+            "/accounts/billing",
+            params={'fields': fields}
+        )
+        return response.json()
+
+    def get_callbacks(self):
+        """Return callbacks configuration for the account
+        """
+        response = self.request.get(url="/accounts/callbacks")
+        return response.json()
+
+    def set_callbacks(self, data):
+        """Enable or update calbacks for the account
+        Parameters
+        ----------
+        data: Dict
+            A dictionary with callback data
+
+        Returns
+        -------
+            
+        """
+        response = self.request.post(
+            url="/accounts/callbacks",
+            data=json.dumps(data)
+        )
+        return response.json()
+
+    def delete_callbacks(self):
+        """
+        """
+        response = self.request.delete(
+            url="/accounts/callback"
+        )
+        return response.json()
