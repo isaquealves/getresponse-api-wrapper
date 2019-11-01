@@ -11,8 +11,7 @@ from getresponse_api_wrapper.settings import Config
 
 class TestConfig:
     def setup(self):
-        supported = {"env.circleci": decouple.RepositoryEnv}
-        self.configobj = Config(supported=supported)
+        self.configobj = Config()
 
     def test_is_class(self):
         assert inspect.isclass(Config), "Config is anything but a class"
