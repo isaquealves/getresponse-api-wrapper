@@ -2,6 +2,7 @@
 """
 import pytest
 
+
 @pytest.fixture()
 def fields():
     return [
@@ -16,8 +17,9 @@ def fields():
         "street",
         "zipCode",
         "numberOfEmployees",
-        "timeFormat"
+        "timeFormat",
     ]
+
 
 @pytest.fixture()
 def data_fields():
@@ -27,5 +29,5 @@ def data_fields():
         "companyName",
         "numberOfEmployees",
         "timeFormat",
-        "Name"
+        "Name",
     ]

@@ -44,7 +44,7 @@ class TestAccounts:
             "masks": [
                 "test@example.com",
                 "quest@example.com",
-                "user@localhost"
+                "user@localhost",
             ]
         }
         self.accounts.update_blacklists(data=data)
@@ -65,17 +65,13 @@ class TestAccounts:
         assert hasattr(self.accounts, "update_account_info")
 
     def test_update_account_info(self):
-        update_data = {
-            "firstName": "Test"
-        }
+        update_data = {"firstName": "Test"}
         self.accounts.update_account_info(data=update_data)
         self.mock_post.assert_called()
 
-    @pytest.mark.parametrize("data,exc", [
-        ({}, ValueError),
-        ({'name': 'Name'}, KeyError)
-    ])
+    @pytest.mark.parametrize(
+        "data,exc", [({}, ValueError), ({"name": "Name"}, KeyError)]
+    )
     def test_update_account_info_raise_with_invalid_data(self, data, exc):
         with pytest.raises(exc):
             self.accounts.update_account_info(data=data)
-

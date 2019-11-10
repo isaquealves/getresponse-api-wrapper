@@ -27,10 +27,7 @@ class TestConfig:
         del os.environ["BASE_URL"]
 
     def test_raise_no_base_url(self):
-        BASE_URL = os.environ.pop(
-            "BASE_URL",
-            "https://localhost"
-        )
+        BASE_URL = os.environ.pop("BASE_URL", "https://localhost")
         path = Path(__file__).parent
         config = Config(path)
         with pytest.raises(decouple.UndefinedValueError):
@@ -38,10 +35,7 @@ class TestConfig:
         os.environ["BASE_URL"] = BASE_URL
 
     def test_raise_no_api_key(self):
-        APIKEY = os.environ.pop(
-            "API_KEY",
-            "oSQMBAmyfHrQrHBBfZEnDOlvsCJpaaVF"
-        )
+        APIKEY = os.environ.pop("API_KEY", "oSQMBAmyfHrQrHBBfZEnDOlvsCJpaaVF")
         path = Path(__file__).parent
         config = Config(path)
         with pytest.raises(decouple.UndefinedValueError):
