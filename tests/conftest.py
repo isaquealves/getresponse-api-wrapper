@@ -2,6 +2,7 @@
 """
 import pytest
 
+
 @pytest.fixture()
 def fields():
     return [
@@ -16,8 +17,9 @@ def fields():
         "street",
         "zipCode",
         "numberOfEmployees",
-        "timeFormat"
+        "timeFormat",
     ]
+
 
 @pytest.fixture()
 def data_fields():
@@ -27,5 +29,21 @@ def data_fields():
         "companyName",
         "numberOfEmployees",
         "timeFormat",
-        "Name"
+        "Name",
     ]
+
+
+@pytest.fixture()
+def callback_sample(request):
+    callback_data = {
+        "url": "https://example.com/callback",
+        "actions": {
+            "open": request.param,
+            "click": request.param,
+            "goal": request.param,
+            "subscribe": request.param,
+            "unsubscribe": request.param,
+            "survey": request.param
+        }
+    }
+    return callback_data

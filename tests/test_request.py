@@ -70,3 +70,17 @@ class TestRequest:
         self.requestobj.post("/", data=data)
         mock_post.assert_called_once_with("/", data=data)
         self.monkeypatch.undo()
+
+    def test_has_member_delete(self):
+        assert hasattr(self.requestobj, "delete")
+
+    def test_delete_is_callable(self):
+        assert hasattr(self.requestobj.delete, "__call__")
+
+    def test_delete_call_requests_delete(self):
+        mock_delete = mock.MagicMock()
+        self.monkeypatch.setattr("requests.Session.delete", mock_delete)
+
+        self.requestobj.delete("/")
+        mock_delete.assert_called_once()
+        self.monkeypatch.undo()

@@ -22,10 +22,12 @@ class Request:
         )
         self.session.hooks = {"response": check_response_errors}
 
-    def get(self, url: str = "", **kwargs) -> requests.models.Response:
+    def get(self, url: str = "", *args, **kwargs) -> requests.models.Response:
         """A wrapper for requests.session.get
         """
-        return self.session.get(url=f"{self.__config.base_url}{url}", **kwargs)
+        return self.session.get(
+            url=f"{self.__config.base_url}{url}", *args, **kwargs
+        )
 
     def post(
         self, url: str = "", data: dict = {}, **kwargs
@@ -34,3 +36,9 @@ class Request:
 
         """
         return self.session.post(url, data=data, **kwargs)
+
+    def delete(self, url: str = ""):
+        """A wrapper for requests.Session.delete
+        """
+        return self.session.delete(url)
+
